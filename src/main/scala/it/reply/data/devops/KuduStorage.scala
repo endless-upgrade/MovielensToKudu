@@ -22,9 +22,11 @@ case class KuduStorage(storage : Storage) {
       .withColumn("u", UDFtoLong('userid))
       .withColumn("m", UDFtoLong('movieid))
       .withColumn("r", UDFtoDouble('rating))
+      .withColumn("time", 'timestamp)
       .drop("userid")
       .drop("movieid")
       .drop("rating")
+      .drop("timestamp")
       .select('u, 'm, 'r, 'time)
       .toDF("userid", "movieid", "rating", "time")
 
@@ -60,8 +62,10 @@ case class KuduStorage(storage : Storage) {
       .load(filename)
       .withColumn("u", UDFtoLong('userid))
       .withColumn("m", UDFtoLong('movieid))
+      .withColumn("time", 'timestamp)
       .drop("userid")
       .drop("movieid")
+      .drop("timestamp")
       .select('u, 'm, 'tag, 'time)
       .toDF("userid", "movieid", "tag", "time")
 
