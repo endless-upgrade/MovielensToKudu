@@ -43,7 +43,7 @@ case class KuduStorage(storage : Storage) {
       .withColumn("u", UDFtoLong('movieid))
       .drop("userid")
       .select('u, 'imdbid, 'tmdbid)
-      .toDF("userid", "imdbid", "tmdbid")
+      .toDF("movieid", "imdbid", "tmdbid")
 
     table.printSchema()
 
